@@ -5,23 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <div class="main">
         <div class="location">
-            <form>
+            <form id="cityForm">
                 <label>City and State</label>
-                <input id="city" type="text"  />
+                <input id="cityInput" type="string" name="cityInput" class="cityInput" />
                 <button type="submit" id="btn">Get Weather</button>
             </form>
         </div>
         <div class="todays-weather-info">
+            <h1 id="cityContainer"></h1>
             <h4>Temperature (F)</h4>
             <h5 id="temp"></h5>
             <h6>Dewpoint</h6>
             <h6 id="dewpoint"></h6>
         </div>
     </div>
+
 <script src="app.js"></script>
 </body>
 </html>
