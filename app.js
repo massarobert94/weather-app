@@ -8,6 +8,10 @@ const button = document.getElementById('btn');
 const putDescriptionHere = document.getElementById('description');
 const putCurrentTempHere = document.getElementById('temp');
 const putCurrentDewpointHere = document.getElementById('dewpoint');
+const putWeatherEventHere = document.getElementById('weatherEvents');
+const putWeatherEventDescHere = document.getElementById('eventDescription');
+const putIconHere = document.getElementById('icon');
+
 
 // FormData API SAVED ME 😤😤😤😤😤😤😤😤😤
 function handleSubmit(event) {
@@ -59,6 +63,13 @@ sendCity('GET', geoUrl)
                 console.log(data);
                 putCurrentTempHere.innerHTML = data.current.temp;
                 putCurrentDewpointHere.innerHTML = data.current.dew_point;
+
+                for (let i=0;i<data.alerts.length;i++){
+                    putWeatherEventHere.innerHTML = data.alerts[i].event;
+                    putWeatherEventDescHere.innerHTML = data.alerts[i].description;
+                }
+
+                putIconHere.src= `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
             })
         }
         getData();
