@@ -12,29 +12,79 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-  <div class="container-fluid">
+  <div class="">
     <div class="mainParent">
     <div class="main">
         <div class="formContainer">
             <form id="cityForm">
-                <label>City and State</label><br>
-                <input id="cityInput" type="string" name="cityInput" class="cityInput" /><br>
-                <button type="submit" id="btn">Get Weather</button>
+                <div class="mb-3 mt-3">
+                <label class="mb-3">City and State</label>
+                </div>
+                <input id="cityInput" type="string" name="cityInput" class="cityInput mb-3" /><br>
+                <button type="submit" id="btn" class="mb-3">Get Weather</button>
             </form>
         </div>
-        <div class="todays-weather-info">
-            <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl" id="cityContainer"></h1>
-            <img id="icon" src="" />
-            <h3 id="weatherDescription"></h3>
-            <h4>Temperature (F)</h4>
-            <h5 id="temp"></h5>
-            <h6>Dewpoint</h6>
-            <h6 id="dewpoint"></h6>
-            <div class="weatherAlerts">
+
+
+        <div class="weatherAlerts tab w-full overflow-hidden border-t">
+            <input class="absolute opacity-0 " id="tab-multi-one" type="checkbox" name="tabs">
+            <label class="block p-5 leading-normal cursor-pointer" id="weatherEvents" for="tab-multi-one" placeholder="Active Weather Alerts"></label>
+            <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+               <p class="p-5" id="eventDescription"></p>
+            </div>
+         </div>
+
+
+
+
+        <!-- <div class="weatherAlerts">
                 <h7 id="weatherEvents"></h7>
                 <p id="eventDescription"></p>
+        </div> -->
+        
+
+<!-- UI Component design: https://tailwindcomponents.com/component/weather-ui-component , integrated classes and id's into the component, changed a few things -->
+
+        <div class="flex items-center justify-center">
+            <div class="flex flex-col bg-white rounded p-4 w-full max-w-xs" id="card">
+                                    <div id="cityContainer" class="font-bold text-xl"></div>
+                                    <div id="todaysDate"class="text-sm text-gray-500">Right Now</div>
+                                    <div class="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-24 w-24">
+                                    <!-- Replaced SVG with dynamic Icon from OpenWeatherAPI -->
+                                        <div id="imgContainer">
+                                            <img id="icon" src="" />
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row items-center justify-center mt-6">
+                                        <div id="temp" class="font-medium text-6xl"></div>
+                                        <div class="flex flex-col items-center ml-6">
+                                            <div id="weatherDescription">Cloudy</div>
+                                            <div class="mt-1">
+                                                <span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
+                                                <span class="text-sm font-light text-gray-500">28°C</span>
+                                            </div>
+                                            <div>
+                                                <span class="text-sm"><i class="far fa-long-arrow-down"></i></span>
+                                                <span class="text-sm font-light text-gray-500">20°C</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row justify-between mt-6">
+                                        <div class="flex flex-col items-center">
+                                            <div class="font-medium text-sm">Wind</div>
+                                            <div class="text-sm text-gray-500">9k/h</div>
+                                        </div>
+                                        <div class="flex flex-col items-center">
+                                            <div class="font-medium text-sm">Dew Point</div>
+                                            <div id="dewpoint" class="text-sm text-gray-500">68%</div>
+                                        </div>
+                                        <div class="flex flex-col items-center">
+                                            <div class="font-medium text-sm">Visibility</div>
+                                            <div class="text-sm text-gray-500">10km</div>
+                                        </div>
+                                    </div>
+                                </div>
             </div>
-        </div>
     </div>
     </div>
   </div>

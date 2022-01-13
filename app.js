@@ -1,4 +1,4 @@
-
+// Grab all elements from the DOM and make them variables I can work with
 
 const cityForm = document.getElementById('cityForm');
 const input = cityForm.querySelector('#cityInput');
@@ -63,7 +63,7 @@ sendCity('GET', geoUrl)
             .then(data => {
                 console.log(data);
                 // Display current temperature for city
-                putCurrentTempHere.innerHTML = data.current.temp;
+                putCurrentTempHere.innerHTML = Math.floor(data.current.temp)+ ' °F';
                 // Display current dew point for city
                 putCurrentDewpointHere.innerHTML = data.current.dew_point;
                 // Icon is provided by API, given as a number/letter combo in API data.
@@ -89,3 +89,21 @@ sendCity('GET', geoUrl)
     getCoordinates();
 }
 cityForm.addEventListener('submit', handleSubmit);
+
+
+// js for active alerts accordion component
+
+/* Optional Javascript to close the radio button version by clicking it again */
+var myRadios = document.getElementsByName('tabs2');
+var setCheck;
+var x = 0;
+for(x = 0; x < myRadios.length; x++){
+    myRadios[x].onclick = function(){
+        if(setCheck != this){
+             setCheck = this;
+        }else{
+            this.checked = false;
+            setCheck = null;
+    }
+    };
+}
