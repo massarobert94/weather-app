@@ -11,7 +11,7 @@ const putCurrentDewpointHere = document.getElementById('dewpoint');
 const putWeatherEventHere = document.getElementById('weatherEvents');
 const putWeatherEventDescHere = document.getElementById('eventDescription');
 const putIconHere = document.getElementById('icon');
-
+const putWeatherDescriptionHere = document.getElementById('weatherDescription');
 
 // FormData API SAVED ME 😤😤😤😤😤😤😤😤😤
 function handleSubmit(event) {
@@ -57,22 +57,32 @@ sendCity('GET', geoUrl)
         console.log(data);
         return data;
     }
-    const getData = async () => {
+    // Gets current weather data, displays in HTML.
+    const getCurrentData = async () => {
         weatherRequest('GET', url)
             .then(data => {
                 console.log(data);
+                // Display current temperature for city
                 putCurrentTempHere.innerHTML = data.current.temp;
+                // Display current dew point for city
                 putCurrentDewpointHere.innerHTML = data.current.dew_point;
-
+                // Icon is provided by API, given as a number/letter combo in API data.
+                putIconHere.src= `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
+                // Handles weather description
+                putWeatherDescriptionHere.innerHTML = data.current.weather[0].description;
+                // Handles Weather Alerts and displays in HTML
+                if(data.alerts != null){              
                 for (let i=0;i<data.alerts.length;i++){
                     putWeatherEventHere.innerHTML = data.alerts[i].event;
                     putWeatherEventDescHere.innerHTML = data.alerts[i].description;
                 }
-
-                putIconHere.src= `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
+                } else {
+                    putWeatherEventHere.innerHTML = 'No active alerts.';
+                    putWeatherEventDescHere.innerHTML = '';
+                }
             })
         }
-        getData();
+        getCurrentData();
 
     })
     }

@@ -6,19 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+  <div class="container-fluid">
+    <div class="mainParent">
     <div class="main">
-        <div class="location">
+        <div class="formContainer">
             <form id="cityForm">
-                <label>City and State</label>
-                <input id="cityInput" type="string" name="cityInput" class="cityInput" />
+                <label>City and State</label><br>
+                <input id="cityInput" type="string" name="cityInput" class="cityInput" /><br>
                 <button type="submit" id="btn">Get Weather</button>
             </form>
         </div>
         <div class="todays-weather-info">
-            <h1 id="cityContainer"></h1>
+            <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl" id="cityContainer"></h1>
             <img id="icon" src="" />
+            <h3 id="weatherDescription"></h3>
             <h4>Temperature (F)</h4>
             <h5 id="temp"></h5>
             <h6>Dewpoint</h6>
@@ -29,6 +36,8 @@
             </div>
         </div>
     </div>
+    </div>
+  </div>
 
 <script src="app.js"></script>
 </body>
