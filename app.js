@@ -12,6 +12,8 @@ const putWeatherEventHere = document.getElementById('weatherEvents');
 const putWeatherEventDescHere = document.getElementById('eventDescription');
 const putIconHere = document.getElementById('icon');
 const putWeatherDescriptionHere = document.getElementById('weatherDescription');
+const putWindspeedHere = document.getElementById('windSpeed');
+const putVisibilityHere = document.getElementById('visibility');
 
 // FormData API SAVED ME 😤😤😤😤😤😤😤😤😤
 function handleSubmit(event) {
@@ -70,6 +72,10 @@ sendCity('GET', geoUrl)
                 putIconHere.src= `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
                 // Handles weather description
                 putWeatherDescriptionHere.innerHTML = data.current.weather[0].description;
+                // Wind speed (mph)
+                putWindspeedHere.innerHTML = data.current.wind_speed + ' mph';
+                // Visibility
+                putVisibilityHere.innerHTML = data.current.visibility/1000 + ' km';
                 // Handles Weather Alerts and displays in HTML
                 if(data.alerts != null){              
                 for (let i=0;i<data.alerts.length;i++){
