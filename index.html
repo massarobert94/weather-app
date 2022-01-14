@@ -21,6 +21,11 @@
                 <label class="mb-3">City and State</label>
                 </div>
                 <input id="cityInput" type="string" name="cityInput" class="cityInput mb-3" /><br>
+                <!-- Rounded switch -->
+                <input type="radio" id='imp' name="unit" value="imperial">
+                    <label for='imp'>F</label>
+                <input type="radio" id='met' name="unit" value="metric">
+                    <label for='met'>C</label>
                 <button type="submit" id="btn" class="mb-3">Get Weather</button>
             </form>
         </div>
@@ -33,15 +38,6 @@
                <p class="p-5" id="eventDescription"></p>
             </div>
          </div>
-
-
-
-
-        <!-- <div class="weatherAlerts">
-                <h7 id="weatherEvents"></h7>
-                <p id="eventDescription"></p>
-        </div> -->
-        
 
 <!-- UI Component design: https://tailwindcomponents.com/component/weather-ui-component , integrated classes and id's into the component, changed a few things -->
 
@@ -58,15 +54,8 @@
                                     <div class="flex flex-row items-center justify-center mt-6">
                                         <div id="temp" class="font-medium text-6xl"></div>
                                         <div class="flex flex-col items-center ml-6">
-                                            <div id="weatherDescription">Cloudy</div>
-                                            <div class="mt-1">
-                                                <span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
-                                                <span class="text-sm font-light text-gray-500">28°C</span>
-                                            </div>
-                                            <div>
-                                                <span class="text-sm"><i class="far fa-long-arrow-down"></i></span>
-                                                <span class="text-sm font-light text-gray-500">20°C</span>
-                                            </div>
+                                            <div id="weatherDescription"></div>
+                                            
                                         </div>
                                     </div>
                                     <div class="flex flex-row justify-between mt-6">
@@ -76,11 +65,11 @@
                                         </div>
                                         <div class="flex flex-col items-center">
                                             <div class="font-medium text-sm">Dew Point</div>
-                                            <div id="dewpoint" class="text-sm text-gray-500">68%</div>
+                                            <div id="dewpoint" class="text-sm text-gray-500"></div>
                                         </div>
                                         <div class="flex flex-col items-center">
-                                            <div class="font-medium text-sm">Visibility</div>
-                                            <div class="text-sm text-gray-500" id="visibility"></div>
+                                            <div class="font-medium text-sm">Feels Like</div>
+                                            <div class="text-sm text-gray-500" id="feelsLike"></div>
                                         </div>
                                     </div>
                                 </div>

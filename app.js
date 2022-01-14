@@ -13,7 +13,9 @@ const putWeatherEventDescHere = document.getElementById('eventDescription');
 const putIconHere = document.getElementById('icon');
 const putWeatherDescriptionHere = document.getElementById('weatherDescription');
 const putWindspeedHere = document.getElementById('windSpeed');
-const putVisibilityHere = document.getElementById('visibility');
+const putFeelsLikeHere = document.getElementById('feelsLike');
+const putImperialHere = document.getElementById('imp');
+const putMetricHere = document.getElementById('met');
 
 // FormData API SAVED ME 😤😤😤😤😤😤😤😤😤
 function handleSubmit(event) {
@@ -50,7 +52,10 @@ sendCity('GET', geoUrl)
     console.log(results[0].geometry.location.lng);
     const longitude = results[0].geometry.location.lng;
     // Latitude and Longitude are obtained and set as variables from previous API. These variables are passed into the API call URL to obtain weather data for those coordinates.
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=minutely,hourly&appid=c680d0ec673f56da94ef0342e8a5212a`;
+
+    const units = (putImperialHere.checked == true) ? 'imperial': 'metric';
+
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=${units}&exclude=minutely,hourly&appid=c680d0ec673f56da94ef0342e8a5212a`;
     
     // Get weather data for the given coordinates, send it to HTML
     const weatherRequest = async (method, url) => {
@@ -65,17 +70,17 @@ sendCity('GET', geoUrl)
             .then(data => {
                 console.log(data);
                 // Display current temperature for city
-                putCurrentTempHere.innerHTML = Math.floor(data.current.temp)+ ' °F';
+                putCurrentTempHere.innerHTML = Math.floor(data.current.temp)+ '°';
                 // Display current dew point for city
-                putCurrentDewpointHere.innerHTML = data.current.dew_point;
+                putCurrentDewpointHere.innerHTML = data.current.dew_point + '°';
                 // Icon is provided by API, given as a number/letter combo in API data.
                 putIconHere.src= `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
                 // Handles weather description
                 putWeatherDescriptionHere.innerHTML = data.current.weather[0].description;
                 // Wind speed (mph)
                 putWindspeedHere.innerHTML = data.current.wind_speed + ' mph';
-                // Visibility
-                putVisibilityHere.innerHTML = data.current.visibility/1000 + ' km';
+                // Feels Like
+                putFeelsLikeHere.innerHTML = data.current.feels_like + '°';
                 // Handles Weather Alerts and displays in HTML
                 if(data.alerts != null){              
                 for (let i=0;i<data.alerts.length;i++){
