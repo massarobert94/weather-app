@@ -5,23 +5,79 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div class="main">
-        <div class="location">
-            <form>
-                <label>City and State</label>
-                <input id="city" type="text"  />
-                <button type="submit" id="btn">Get Weather</button>
+  <div class="">
+    <div class="mainParent">
+    <div class="main mx-auto">
+        <div class="formContainer">
+            <form id="cityForm">
+                <div class="mb-3 mt-3">
+                <label class="mb-3">City and State</label>
+                </div>
+                <input id="cityInput" type="string" name="cityInput" class="cityInput mb-3" /><br>
+                <!-- Rounded switch -->
+                <input type="radio" id='imp' name="unit" value="imperial">
+                    <label for='imp'>F</label>
+                <input type="radio" id='met' name="unit" value="metric">
+                    <label for='met'>C</label>
+                <button type="submit" id="btn" class="mb-3">Get Weather</button>
             </form>
         </div>
-        <div class="todays-weather-info">
-            <h4>Temperature (F)</h4>
-            <h5 id="temp"></h5>
-            <h6>Dewpoint</h6>
-            <h6 id="dewpoint"></h6>
-        </div>
+
+
+        <div class="mb-3 weatherAlerts tab w-full overflow-hidden border-t">
+            <input class="absolute opacity-0 " id="tab-multi-one" type="checkbox" name="tabs">
+            <label class="block p-5 leading-normal cursor-pointer" id="weatherEvents" for="tab-multi-one" placeholder="Active Weather Alerts"></label>
+            <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+               <p class="p-5" id="eventDescription"></p>
+            </div>
+         </div>
+
+<!-- UI Component design: https://tailwindcomponents.com/component/weather-ui-component , integrated classes and id's into the component, changed a few things -->
+
+        <div class="mb-3 flex items-center justify-center">
+            <div class="flex flex-col bg-white rounded p-4 w-full max-w-xs" id="card">
+                                    <div id="cityContainer" class="font-bold text-xl"></div>
+                                    <div id="todaysDate"class="text-sm text-gray-500">Right Now</div>
+                                    <div class="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-24 w-24">
+                                    <!-- Replaced SVG with dynamic Icon from OpenWeatherAPI -->
+                                        <div id="imgContainer">
+                                            <img id="icon" src="" />
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row items-center justify-center mt-6">
+                                        <div id="temp" class="font-medium text-6xl"></div>
+                                        <div class="flex flex-col items-center ml-6">
+                                            <div id="weatherDescription"></div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row justify-between mt-6">
+                                        <div class="flex flex-col items-center">
+                                            <div class="font-medium text-sm">Wind</div>
+                                            <div class="text-sm text-gray-500" id="windSpeed"></div>
+                                        </div>
+                                        <div class="flex flex-col items-center">
+                                            <div class="font-medium text-sm">Dew Point</div>
+                                            <div id="dewpoint" class="text-sm text-gray-500"></div>
+                                        </div>
+                                        <div class="flex flex-col items-center">
+                                            <div class="font-medium text-sm">Feels Like</div>
+                                            <div class="text-sm text-gray-500" id="feelsLike"></div>
+                                        </div>
+                                    </div>
+                                </div>
+            </div>
     </div>
+    </div>
+  </div>
+
 <script src="app.js"></script>
 </body>
 </html>
