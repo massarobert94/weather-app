@@ -9,6 +9,7 @@ body{
 
 .main {
     display: inline-block;
+    width: 100%;
     max-width: 480px;
     position: absolute;
     background: rgba( 11, 211, 211, 0.50 );
