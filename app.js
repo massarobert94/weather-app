@@ -74,7 +74,7 @@ sendCity('GET', geoUrl)
                 // Display current dew point for city
                 putCurrentDewpointHere.innerHTML = data.current.dew_point + '°';
                 // Icon is provided by API, given as a number/letter combo in API data.
-                putIconHere.src= `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
+                putIconHere.src= `https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
                 // Handles weather description
                 putWeatherDescriptionHere.innerHTML = data.current.weather[0].description;
                 // Wind speed (mph)
