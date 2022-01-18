@@ -29,7 +29,8 @@ function handleSubmit(event) {
     cityContainer.innerHTML = city;
 
 // URL for Google GeoCoding API Call. Lat and Lon coordinates returned from call
-const geoUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=AIzaSyAAKTI9WyKzFDxKZDomHIrSaVP22BgzRY0`;
+const geoApiKey = 'AIzaSyAAKTI9WyKzFDxKZDomHIrSaVP22BgzRY0';
+const geoUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${geoApiKey}`;
 
 
 // Get Latitude and Longitude coordinates from given city
@@ -52,10 +53,10 @@ sendCity('GET', geoUrl)
     console.log(results[0].geometry.location.lng);
     const longitude = results[0].geometry.location.lng;
     // Latitude and Longitude are obtained and set as variables from previous API. These variables are passed into the API call URL to obtain weather data for those coordinates.
-
+    const apiKey = 'c680d0ec673f56da94ef0342e8a5212a';
     const units = (putImperialHere.checked == true) ? 'imperial': 'metric';
 
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=${units}&exclude=minutely,hourly&appid=c680d0ec673f56da94ef0342e8a5212a`;
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=${units}&exclude=minutely,hourly&appid=${apiKey}`;
     
     // Get weather data for the given coordinates, send it to HTML
     const weatherRequest = async (method, url) => {
@@ -91,6 +92,66 @@ sendCity('GET', geoUrl)
                     putWeatherEventHere.innerHTML = 'No active alerts.';
                     putWeatherEventDescHere.innerHTML = '';
                 }
+                // Need to make daily forecast object constructor
+                
+                const createDailyHtml = (tempMin, tempMax, weather, icon, dayNumber) => 
+                `
+                <div id="dayContainer">
+                <div id="dayDeclare">${dayNumber}</div>
+                <div id="imgContainer">
+                    <img id="icon" src=${icon} />
+                </div>
+                <div>Weather: ${weather}</div>
+                <div>High: ${tempMax}</div>
+                <div>Low: ${tempMin}</div>
+                </div>
+                `;
+
+
+                class DailyForecast {
+                    constructor() {
+                        this.days = [];
+                        // console.log(days);
+                    }
+                // Create a day object for each day in the forecast
+                    addDays(){
+                        for (let i =0 ; i < data.daily.length; i++){
+                            const day = {
+                                tempMin: data.daily[i].temp.min,
+                                tempMax: data.daily[i].temp.max,
+                                weather: data.daily[i].weather[0].main,
+                                icon: `https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png`,
+                                dayNumber: data.daily[i].indexOf
+                            };
+                        this.days.push(day);
+                        // console.log(day);
+                        console.log(day.dayNumber);
+                        }
+                    };  
+
+                // Display the day data    
+
+                    render(){
+                        const dailyForecastHtmlList = [];
+                        for(let i = 0; i < this.days.length; i++){
+                            const day = this.days[i];
+                            const dayHtml = createDailyHtml(day.tempMin, day.tempMax, day.weather, day.icon);
+                            dailyForecastHtmlList.push(dayHtml);
+                        }
+                    const daysHtml = dailyForecastHtmlList.join('\n');
+                    const daysList = document.querySelector('#dailyForecastList');
+                    daysList.innerHTML = daysHtml;
+
+                    
+                    }  
+                }
+                // Gonna try to get a 10 day forecast going
+                
+
+
+                const forecast = new DailyForecast();
+                forecast.addDays();
+                forecast.render();
             })
         }
         getCurrentData();
