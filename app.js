@@ -29,7 +29,7 @@ function handleSubmit(event) {
     cityContainer.innerHTML = city;
 
 // URL for Google GeoCoding API Call. Lat and Lon coordinates returned from call
-const geoApiKey = 'AIzaSyAAKTI9WyKzFDxKZDomHIrSaVP22BgzRY0';
+const geoApiKey = config.GEO_KEY;
 const geoUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${geoApiKey}`;
 
 
@@ -53,7 +53,7 @@ sendCity('GET', geoUrl)
     console.log(results[0].geometry.location.lng);
     const longitude = results[0].geometry.location.lng;
     // Latitude and Longitude are obtained and set as variables from previous API. These variables are passed into the API call URL to obtain weather data for those coordinates.
-    const apiKey = 'c680d0ec673f56da94ef0342e8a5212a';
+    const apiKey = config.WEATHER_KEY;
     const units = (putImperialHere.checked == true) ? 'imperial': 'metric';
 
     const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=${units}&exclude=minutely,hourly&appid=${apiKey}`;
