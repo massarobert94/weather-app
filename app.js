@@ -96,15 +96,14 @@ sendCity('GET', geoUrl)
                 
                 const createDailyHtml = (tempMin, tempMax, weather, icon, dayNumber) => 
                 `
-                <div id="dayContainer">
-                <div id="dayDeclare">${dayNumber}</div>
+                <li class="items-center justify-center w-full max-w-s mb-2" id="dayContainer">
                 <div id="imgContainer">
                     <img id="icon" src=${icon} />
                 </div>
                 <div>Weather: ${weather}</div>
-                <div>High: ${tempMax}</div>
-                <div>Low: ${tempMin}</div>
-                </div>
+                <div>High: ${tempMax}°</div>
+                <div>Low: ${tempMin}°</div>
+                </li>
                 `;
 
 
