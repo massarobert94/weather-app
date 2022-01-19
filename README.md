@@ -1,5 +1,5 @@
 # weather-app
-City is given, which is sent to an API returning lat &amp; lng coordinates, which are then sent to a weather API returning weather data for those coordinates.
+City is given, which is sent to Google Maps API returning lat &amp; lng coordinates, which are then sent to Open Weather API returning weather data for those coordinates.
 
 
 You'll need to get an API key for Google Maps API and for Open Weather API.
