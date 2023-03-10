@@ -93,7 +93,7 @@ sendCity('GET', geoUrl)
                 }
                 var dayName = today.getDayName();
 
-                today = dayName + ', ' + mm + '/' + dd + '/' + yyyy;
+                today = mm + '/' + dd + '/' + yyyy;
                 putTodaysDateHere.innerHTML = today;
 
                 
