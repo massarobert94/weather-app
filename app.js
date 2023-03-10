@@ -72,13 +72,28 @@ sendCity('GET', geoUrl)
         weatherRequest('GET', url)
             .then(data => {
                 console.log(data);
+                
+                var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
                 // Display current date
                 let today = new Date();
+                
+                // var d = new Date(dateString);
+                // var dayName = days[d.getDay()];
+        
                 var dd = String(today.getDate()).padStart(2, '0');
                 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                 var yyyy = today.getFullYear();
                 
-                today = mm + '/' + dd + '/' + yyyy;
+                // Day name
+                Date.prototype.getDayName = function() {
+                    
+                    var dayNumber = this.getDay();
+                    return dayNames[ dayNumber ];
+                }
+                var dayName = today.getDayName();
+
+                today = dayName + ', ' + mm + '/' + dd + '/' + yyyy;
                 putTodaysDateHere.innerHTML = today;
 
                 
@@ -106,7 +121,7 @@ sendCity('GET', geoUrl)
                 }
                 // Need to make daily forecast object constructor
                 
-                const createDailyHtml = (date, tempMin, tempMax, weather, icon, dayNumber) => 
+                const createDailyHtml = (date, tempMin, tempMax, weather, icon) => 
                 `
                 <li class="flex flex-col items-center justify-evenly w-1/2 max-w-s mb-2" id="dayContainer">
                 <div id="dateContainer">Date: ${date}</div>
@@ -132,17 +147,19 @@ sendCity('GET', geoUrl)
                         for (let i =0 ; i < data.daily.length; i++){
                             // Display current date
                         let date = new Date();
+                            // date.getDay();
                         // date.setDate(date.getDate() + 1);
-                
+                            
                             const day = {
                                 // increment date and format it
-                                date: date = mm + '/' + dd++ + '/' + yyyy,
+                                date: date = dayName + ', ' + mm + '/' + dd++ + '/' + yyyy,
                                 tempMin: Math.round(data.daily[i].temp.min),
                                 tempMax: Math.round(data.daily[i].temp.max),
                                 weather: data.daily[i].weather[0].main,
-                                icon: `https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png`,
-                                dayNumber: data.daily[i].indexOf
+                                icon: `https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png`
+                                
                             };
+                            
                         this.days.push(day);
                         // console.log(day);
                         }
