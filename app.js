@@ -152,7 +152,7 @@ sendCity('GET', geoUrl)
                             
                             const day = {
                                 // increment date and format it
-                                date: date = dayName + ', ' + mm + '/' + dd++ + '/' + yyyy,
+                                date: date = mm + '/' + dd++ + '/' + yyyy,
                                 tempMin: Math.round(data.daily[i].temp.min),
                                 tempMax: Math.round(data.daily[i].temp.max),
                                 weather: data.daily[i].weather[0].main,
